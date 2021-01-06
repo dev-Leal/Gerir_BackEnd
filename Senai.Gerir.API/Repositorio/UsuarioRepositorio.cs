@@ -67,6 +67,9 @@ namespace Senai.Gerir.API.Repositorio
                 usuarioexiste.Nome = usuario.Nome;
                 usuarioexiste.Email = usuario.Email;
 
+                // = significa que ele esta recebendo 
+                // == significa que ele esta comparando  
+
                 if (!string.IsNullOrEmpty(usuario.Senha))
                     usuarioexiste.Senha = usuario.Senha;
 

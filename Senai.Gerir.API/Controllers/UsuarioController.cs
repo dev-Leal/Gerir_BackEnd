@@ -46,7 +46,7 @@ namespace Senai.Gerir.API.Controllers
                 return Ok(usuario);
             }
 
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -94,8 +94,7 @@ namespace Senai.Gerir.API.Controllers
 
                 //Pega o id do usuário na Claim Jti 
                 var usuarioid = claimsUsuario.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Jti);
-
-                //Pega
+        
                 var usuario = _usuarioRepository.BuscarPorId(new Guid(usuarioid.Value));
 
 
