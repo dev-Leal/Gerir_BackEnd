@@ -31,9 +31,29 @@ namespace Senai.Gerir.API.Repositorio
         }
 
 
-        public Tarefa AlteraStatus(Guid IdTarefa)
+        public Tarefa AlterarStatus(Guid IdTarefa)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //Busca a tarefa pelo seu id
+                var tarefa = BuscarPorId(IdTarefa);
+
+                //Altera o valor do status conforme estiver no banco
+                //Se estiver true o inverso é false
+                //Se estiver false o inverso é true
+                tarefa.Status = !tarefa.Status;
+
+                _context.Tarefas.Update(tarefa);
+                _context.SaveChanges();
+
+                return tarefa;
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
 
         public Tarefa BuscarPorId(Guid IdTarefa)
@@ -87,7 +107,7 @@ namespace Senai.Gerir.API.Repositorio
 
                 //Verifica se o tarefa existe
                 if (tarefaexiste == null)
-                    throw new Exception("Essa tarefa não encontrada");
+                    throw new Exception("Essa tarefa não foi encontrada");
 
 
                 //Verifica se o valor descrição é nulo ou vazio
@@ -101,7 +121,11 @@ namespace Senai.Gerir.API.Repositorio
                 tarefaexiste.Categoria = tarefa.Categoria;
 
                 //Fazer o if/ null para tarefas
+                if (tarefaexiste == null)
+                    throw new Exception("A campo está inválido pois permanece vazio. " +
+                                        "Por favor preencha todos os dados");
                 tarefaexiste.DataEntrega = tarefa.DataEntrega;
+
 
                 if (!string.IsNullOrEmpty(tarefa.Titulo))
                 tarefaexiste.Titulo = tarefa.Titulo;
@@ -121,8 +145,18 @@ namespace Senai.Gerir.API.Repositorio
 
         public List<Tarefa> ListarTodos(Guid IdUsuario)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _context.Tarefas.Where(
+                            c => c.UsuarioId == IdUsuario
+                            ).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
+
 
         public void Remover(Guid Id)
         {

@@ -10,7 +10,7 @@ namespace Senai.Gerir.API.Interfaces
     {
         Tarefa Cadastrar(Tarefa tarefa);
         List<Tarefa> ListarTodos(Guid IdUsuario);
-        Tarefa AlteraStatus(Guid IdTarefa);
+        Tarefa AlterarStatus(Guid IdTarefa);
         void Remover(Guid Id);
         Tarefa Editar(Tarefa tarefa);
         Tarefa BuscarPorId(Guid IdTarefa);

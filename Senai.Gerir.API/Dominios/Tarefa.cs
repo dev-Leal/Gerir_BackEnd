@@ -11,6 +11,9 @@ namespace Senai.Gerir.API.Dominios
         {
             //Gera um novo Id sempre que é cadastrado 
             Id = Guid.NewGuid();
+            //Para que o valor NULL colocado no banco seja por padrão 0 
+            //quando não for cadastrado
+            Status = false;
         }
         public Guid Id { get; set; }
         public string Titulo { get; set; }
